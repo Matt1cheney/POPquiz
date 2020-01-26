@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="style.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <header>
+    <div class="jumbotron">
+
+      <p id="timerAmt" class="text-right">
+        <p>
+          <h1 class="text-center display-4">Coding Pop Quiz!</h1>
+          <p class="text-center lead">be prepared! this carefully thought out quiz will test your skills as a developer.
+          </p>
+          <hr class="my-4">
+          <p class="text-center">please hit start below to begin!</p>
+          <div class="row">
+            <div class="col text-center">
+              <a id="start" class="btn btn-success btn-lg" href="#" role="button">Start!</a>
+            </div>
+          </div>
+    </div>
+  </header>
+  <div class="card">
+    <h3 id="question" class="text-center card-header">question here</h3>
+    <ul id="choices" class="text-center">choices go here</ul>
+  </div>
+  <div>
+    <p id="react" class="ml-5 text-left">correct or incorrect!</p>
+  </div>
+
+</body>
+<script type="text/javascript">
+  //start quiz
+  // let questionArr = [question1, question2, question3, question4, question5];
+  let startBtn = false;
+
+  let startClk = $("#start").on("click", function (e) {
+    startBtn = true;
+    if (startBtn) {
+
+      var counter = 100;
+      let timer = setInterval(function () {
+        $("#timerAmt").text("timer: " + counter);
+        counter--
+        if (counter < 0) {
+          $("#timerAmt").text("you lose!");
+          clearInterval(timer);
+        }
+      }, 1000);
+
+
+    }
+
+    let question1 = $("#question").text("hello", function(){
+      $("#choices").append("<ul>how are you?</ul>").text();
+    });
+  });
+
+
+
+
+</script>
+
+
+</html>
