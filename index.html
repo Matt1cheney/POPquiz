@@ -38,9 +38,7 @@
     <div class="card">
       <h3 id="liveQuestion" class="text-center card-header">question here</h3>
       <div id="choiceAppend">
-        <ol id="choices" class="text-center">
-
-        </ol>
+        <ol id="choices" class="text-center"></ol>
       </div>
     </div>
     <div>
@@ -50,30 +48,27 @@
   <script type="text/javascript">
     let choices = $("#choices");
     let questions = $("#liveQuestion");
-    let currentQuestionIndex, questionShuffler
+    let currentQuestionIndex, questionShuffler;
     let startBtn = false;
 
     function nextQuestion() {
-      questionAppear(questionShuffler[currentQuestionIndex])
-      
+      questionAppear(questionShuffler[currentQuestionIndex]);
     }
-    
+
     function questionAppear(questionList) {
-      $(questions).text (questionList.question);
+      $(questions).text(questionList.question);
       choices.empty();
-      
-      questionList.options.forEach((option) => {
-        let choiceLi = $("<li>").addClass("btn btn-success choice").attr("data-choiceJudge" , option.correct).text(option.text);
-      choices.append(choiceLi);
+
+      questionList.options.forEach(option => {
+        let choiceLi = $("<li>")
+          .addClass("btn btn-success choice")
+          .attr("data-choiceJudge", option.correct)
+          .text(option.text);
+        choices.append(choiceLi);
       });
-     
     }
-    
-    
-    
-    
-    
-    function timerStart(){
+
+    function timerStart() {
       var counter = 100;
       let timer = setInterval(function() {
         $("#timerAmt").text("timer: " + counter);
@@ -83,85 +78,81 @@
           clearInterval(timer);
         }
       }, 1000);
-      };
-      
+    }
+
     let startClk = $("#start").on("click", function(e) {
       //start quiz
       $(this).hide();
       timerStart();
-      questionShuffler = questionList.sort(() => Math.random() - .5);
-      currentQuestionIndex= 0;
+      questionShuffler = questionList.sort(() => Math.random() - 0.5);
+      currentQuestionIndex = 0;
       nextQuestion();
     });
-    
+
     const questionList = [
       {
         question: "how are you?",
         options: [
-          {text:  "alright", correct: true}, 
-          {text:  "ehh" , correct: false}, 
-          {text:  "bad", correct: false}, 
-          {text: "terrible", correct: false},
+          { text: "alright", correct: true },
+          { text: "ehh", correct: false },
+          { text: "bad", correct: false },
+          { text: "terrible", correct: false }
         ]
       },
       {
         question: "what day is today?",
         options: [
-          {text: "sunday", correct: true},
-          {text: "monday", correct: false},
-          {text: "tuesday", correct: false},
-          {text: "wednesday", correct: false}
-        ],
-        
+          { text: "sunday", correct: true },
+          { text: "monday", correct: false },
+          { text: "tuesday", correct: false },
+          { text: "wednesday", correct: false }
+        ]
       },
       {
         question: "do you hate this?",
         options: [
-          {text: "yeahp", correct: false},
-          {text: "totally", correct: false},
-          {text: "possibly", correct: true},
-          {text: "bleh", correct: false}
-        ],
-        
+          { text: "yeahp", correct: false },
+          { text: "totally", correct: false },
+          { text: "possibly", correct: true },
+          { text: "bleh", correct: false }
+        ]
       },
       {
         question: "who is a marvel character?",
         options: [
-          {text: "deadpool", correct: false},
-          {text: "superman", correct: true},
-          {text: "batman", correct: false},
-          {text: "Joker", correct: false}
-        ],
-        
+          { text: "deadpool", correct: false },
+          { text: "superman", correct: true },
+          { text: "batman", correct: false },
+          { text: "Joker", correct: false }
+        ]
       },
       {
         question: " where is a teddybear?",
         options: [
-          {text: "under the bed", correct: true},
-          {text: "in the toaster", correct: false},
-          {text: "outside", correct: false},
-          {text:"in the bed", correct: false}
-        ],
-        
+          { text: "under the bed", correct: true },
+          { text: "in the toaster", correct: false },
+          { text: "outside", correct: false },
+          { text: "in the bed", correct: false }
+        ]
       }
     ];
-    $(document).on("click", "li.choice" ,function(){
-        const isCorrect =  $(this).attr("data-choiceJudge");
-        if(isCorrect === "true") {
-          $("#react").attr("class","text text-success").text("correct!");
-          
-        }
-        else {
-          $("#react").attr("class", "text text-danger").text("incorrect!");
-        }
-        if(currentQuestionIndex < questionList.length){
-          
-          nextQuestion();
-          currentQuestionIndex++;
-        }
-        else {
-          return console.log(gameover);
-        }
-    })
-    </script>
+    $(document).on("click", "li.choice", function() {
+      const isCorrect = $(this).attr("data-choiceJudge");
+      if (isCorrect === "true") {
+        $("#react")
+          .attr("class", "text text-success")
+          .text("correct!");
+      } else {
+        $("#react")
+          .attr("class", "text text-danger")
+          .text("incorrect!");
+      }
+      if (currentQuestionIndex < questionList.length) {
+        nextQuestion();
+        currentQuestionIndex++;
+      } else {
+        return console.log(gameover);
+      }
+    });
+  </script>
 </html>
